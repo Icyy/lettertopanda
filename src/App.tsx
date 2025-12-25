@@ -1,13 +1,14 @@
-import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import LandingPage from './components/LandingPage';
-import ActivityPage from './components/ActivityPage';
-import ChillZone from './components/ChillZone';
-import CardsSection from './components/CardsSection';
-import FinalLetter from './components/FinalLetter';
-import CherryBlossoms from './components/CherryBlossoms';
-import AeroplanePng from './imgs/Aeroplane.png';
-import './App.css';
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import LandingPage from "./components/LandingPage";
+import ActivityPage from "./components/ActivityPage";
+import ChillZone from "./components/ChillZone";
+import CardsSection from "./components/CardsSection";
+import FinalLetter from "./components/FinalLetter";
+import CherryBlossoms from "./components/CherryBlossoms";
+import AeroplanePng from "./imgs/Aeroplane.png";
+import "./App.css";
+import { Analytics } from "@vercel/analytics/react";
 
 function App() {
   const [showIntro, setShowIntro] = useState(true);
@@ -24,134 +25,404 @@ function App() {
 
   useEffect(() => {
     // Scroll to top when page changes
-    window.scrollTo({ top: 0, behavior: 'instant' });
+    window.scrollTo({ top: 0, behavior: "instant" });
   }, [currentPage]);
-  
+
   const pages = [
     <LandingPage onEnter={() => goToPage(1)} />,
     <ActivityPage onNext={() => goToPage(2)} />,
     <ChillZone onNext={() => goToPage(3)} />,
     <CardsSection onNext={() => goToPage(4)} />,
-    <FinalLetter onRestart={() => { setShowIntro(true); setTimeout(() => setShowIntro(false), 3000); setCurrentPage(0); }} />
+    <FinalLetter
+      onRestart={() => {
+        setShowIntro(true);
+        setTimeout(() => setShowIntro(false), 3000);
+        setCurrentPage(0);
+      }}
+    />,
   ];
 
   const goToPage = (pageIndex: number) => {
     setCurrentPage(pageIndex);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
-    <div className="app">
-      {/* Aeroplane Intro */}
-      {showIntro && (
-        <div className={`aeroplane-intro-overlay ${!showIntro ? 'fade-out' : ''}`}>
-          {/* Animated SVG Clouds - Cartoon style with soft pastels */}
-          <svg className="cloud cloud-1" viewBox="0 0 200 100" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <linearGradient id="cloudGradient1" x1="0%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" style={{stopColor: '#FFFFFF', stopOpacity: 1}} />
-                <stop offset="100%" style={{stopColor: '#FFF5F0', stopOpacity: 0.95}} />
-              </linearGradient>
-            </defs>
-            <ellipse cx="60" cy="55" rx="35" ry="25" fill="url(#cloudGradient1)" stroke="#D95D39" strokeWidth="1.5" strokeOpacity="0.35"/>
-            <ellipse cx="85" cy="50" rx="40" ry="30" fill="url(#cloudGradient1)" stroke="#D95D39" strokeWidth="1.5" strokeOpacity="0.35"/>
-            <ellipse cx="110" cy="55" rx="35" ry="25" fill="url(#cloudGradient1)" stroke="#D95D39" strokeWidth="1.5" strokeOpacity="0.35"/>
-            <ellipse cx="75" cy="65" rx="50" ry="25" fill="url(#cloudGradient1)" stroke="#D95D39" strokeWidth="1.5" strokeOpacity="0.35"/>
-          </svg>
-          
-          <svg className="cloud cloud-2" viewBox="0 0 200 100" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <linearGradient id="cloudGradient2" x1="0%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" style={{stopColor: '#FFFFFF', stopOpacity: 1}} />
-                <stop offset="100%" style={{stopColor: '#FFF9F3', stopOpacity: 0.95}} />
-              </linearGradient>
-            </defs>
-            <ellipse cx="60" cy="55" rx="35" ry="25" fill="url(#cloudGradient2)" stroke="#EE964B" strokeWidth="1.5" strokeOpacity="0.35"/>
-            <ellipse cx="85" cy="50" rx="40" ry="30" fill="url(#cloudGradient2)" stroke="#EE964B" strokeWidth="1.5" strokeOpacity="0.35"/>
-            <ellipse cx="110" cy="55" rx="35" ry="25" fill="url(#cloudGradient2)" stroke="#EE964B" strokeWidth="1.5" strokeOpacity="0.35"/>
-            <ellipse cx="75" cy="65" rx="50" ry="25" fill="url(#cloudGradient2)" stroke="#EE964B" strokeWidth="1.5" strokeOpacity="0.35"/>
-          </svg>
-          
-          <svg className="cloud cloud-3" viewBox="0 0 200 100" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <linearGradient id="cloudGradient3" x1="0%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" style={{stopColor: '#FFFFFF', stopOpacity: 1}} />
-                <stop offset="100%" style={{stopColor: '#F0F5F3', stopOpacity: 0.95}} />
-              </linearGradient>
-            </defs>
-            <ellipse cx="60" cy="55" rx="35" ry="25" fill="url(#cloudGradient3)" stroke="#8DA399" strokeWidth="1.5" strokeOpacity="0.35"/>
-            <ellipse cx="85" cy="50" rx="40" ry="30" fill="url(#cloudGradient3)" stroke="#8DA399" strokeWidth="1.5" strokeOpacity="0.35"/>
-            <ellipse cx="110" cy="55" rx="35" ry="25" fill="url(#cloudGradient3)" stroke="#8DA399" strokeWidth="1.5" strokeOpacity="0.35"/>
-            <ellipse cx="75" cy="65" rx="50" ry="25" fill="url(#cloudGradient3)" stroke="#8DA399" strokeWidth="1.5" strokeOpacity="0.35"/>
-          </svg>
-          
-          <svg className="cloud cloud-4" viewBox="0 0 200 100" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <linearGradient id="cloudGradient4" x1="0%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" style={{stopColor: '#FFFFFF', stopOpacity: 1}} />
-                <stop offset="100%" style={{stopColor: '#FFF5F0', stopOpacity: 0.95}} />
-              </linearGradient>
-            </defs>
-            <ellipse cx="60" cy="55" rx="35" ry="25" fill="url(#cloudGradient4)" stroke="#D95D39" strokeWidth="1.5" strokeOpacity="0.35"/>
-            <ellipse cx="85" cy="50" rx="40" ry="30" fill="url(#cloudGradient4)" stroke="#D95D39" strokeWidth="1.5" strokeOpacity="0.35"/>
-            <ellipse cx="110" cy="55" rx="35" ry="25" fill="url(#cloudGradient4)" stroke="#D95D39" strokeWidth="1.5" strokeOpacity="0.35"/>
-            <ellipse cx="75" cy="65" rx="50" ry="25" fill="url(#cloudGradient4)" stroke="#D95D39" strokeWidth="1.5" strokeOpacity="0.35"/>
-          </svg>
-          
-          <svg className="cloud cloud-5" viewBox="0 0 200 100" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <linearGradient id="cloudGradient5" x1="0%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" style={{stopColor: '#FFFFFF', stopOpacity: 1}} />
-                <stop offset="100%" style={{stopColor: '#F0F5F3', stopOpacity: 0.95}} />
-              </linearGradient>
-            </defs>
-            <ellipse cx="60" cy="55" rx="35" ry="25" fill="url(#cloudGradient5)" stroke="#8DA399" strokeWidth="1.5" strokeOpacity="0.35"/>
-            <ellipse cx="85" cy="50" rx="40" ry="30" fill="url(#cloudGradient5)" stroke="#8DA399" strokeWidth="1.5" strokeOpacity="0.35"/>
-            <ellipse cx="110" cy="55" rx="35" ry="25" fill="url(#cloudGradient5)" stroke="#8DA399" strokeWidth="1.5" strokeOpacity="0.35"/>
-            <ellipse cx="75" cy="65" rx="50" ry="25" fill="url(#cloudGradient5)" stroke="#8DA399" strokeWidth="1.5" strokeOpacity="0.35"/>
-          </svg>
-          
-          <img 
-            src={AeroplanePng}
-            alt="aeroplane" 
-            className="aeroplane-img"
-          />
-          <div className="typing-text">
-            <span className="typing-content">Loading something special for you</span>
-          </div>
-        </div>
-      )}
-
-
-
-      {!showIntro && (
-        <>
-          {/* Unified Background */}
-          <div className="fixed inset-0 bg-background-light" style={{ zIndex: 0 }} />
-          
-          {/* Cherry Blossoms */}
-          <CherryBlossoms />
-          
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={currentPage}
-              initial={{ opacity: 0, scale: 0.99 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.99 }}
-              transition={{ 
-                duration: 0.4, 
-                ease: [0.4, 0.0, 0.2, 1]
-              }}
-              className="page-container text-gray-800 font-body overflow-hidden relative min-h-screen flex flex-col w-full"
-              style={{ maxWidth: '100vw' }}
+    <>
+      <div className="app">
+        {/* Aeroplane Intro */}
+        {showIntro && (
+          <div
+            className={`aeroplane-intro-overlay ${
+              !showIntro ? "fade-out" : ""
+            }`}
+          >
+            {/* Animated SVG Clouds - Cartoon style with soft pastels */}
+            <svg
+              className="cloud cloud-1"
+              viewBox="0 0 200 100"
+              xmlns="http://www.w3.org/2000/svg"
             >
-              {pages[currentPage]}
-            </motion.div>
-          </AnimatePresence>
-        </>
-      )}
+              <defs>
+                <linearGradient
+                  id="cloudGradient1"
+                  x1="0%"
+                  y1="0%"
+                  x2="0%"
+                  y2="100%"
+                >
+                  <stop
+                    offset="0%"
+                    style={{ stopColor: "#FFFFFF", stopOpacity: 1 }}
+                  />
+                  <stop
+                    offset="100%"
+                    style={{ stopColor: "#FFF5F0", stopOpacity: 0.95 }}
+                  />
+                </linearGradient>
+              </defs>
+              <ellipse
+                cx="60"
+                cy="55"
+                rx="35"
+                ry="25"
+                fill="url(#cloudGradient1)"
+                stroke="#D95D39"
+                strokeWidth="1.5"
+                strokeOpacity="0.35"
+              />
+              <ellipse
+                cx="85"
+                cy="50"
+                rx="40"
+                ry="30"
+                fill="url(#cloudGradient1)"
+                stroke="#D95D39"
+                strokeWidth="1.5"
+                strokeOpacity="0.35"
+              />
+              <ellipse
+                cx="110"
+                cy="55"
+                rx="35"
+                ry="25"
+                fill="url(#cloudGradient1)"
+                stroke="#D95D39"
+                strokeWidth="1.5"
+                strokeOpacity="0.35"
+              />
+              <ellipse
+                cx="75"
+                cy="65"
+                rx="50"
+                ry="25"
+                fill="url(#cloudGradient1)"
+                stroke="#D95D39"
+                strokeWidth="1.5"
+                strokeOpacity="0.35"
+              />
+            </svg>
 
-      <style>{`
+            <svg
+              className="cloud cloud-2"
+              viewBox="0 0 200 100"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <defs>
+                <linearGradient
+                  id="cloudGradient2"
+                  x1="0%"
+                  y1="0%"
+                  x2="0%"
+                  y2="100%"
+                >
+                  <stop
+                    offset="0%"
+                    style={{ stopColor: "#FFFFFF", stopOpacity: 1 }}
+                  />
+                  <stop
+                    offset="100%"
+                    style={{ stopColor: "#FFF9F3", stopOpacity: 0.95 }}
+                  />
+                </linearGradient>
+              </defs>
+              <ellipse
+                cx="60"
+                cy="55"
+                rx="35"
+                ry="25"
+                fill="url(#cloudGradient2)"
+                stroke="#EE964B"
+                strokeWidth="1.5"
+                strokeOpacity="0.35"
+              />
+              <ellipse
+                cx="85"
+                cy="50"
+                rx="40"
+                ry="30"
+                fill="url(#cloudGradient2)"
+                stroke="#EE964B"
+                strokeWidth="1.5"
+                strokeOpacity="0.35"
+              />
+              <ellipse
+                cx="110"
+                cy="55"
+                rx="35"
+                ry="25"
+                fill="url(#cloudGradient2)"
+                stroke="#EE964B"
+                strokeWidth="1.5"
+                strokeOpacity="0.35"
+              />
+              <ellipse
+                cx="75"
+                cy="65"
+                rx="50"
+                ry="25"
+                fill="url(#cloudGradient2)"
+                stroke="#EE964B"
+                strokeWidth="1.5"
+                strokeOpacity="0.35"
+              />
+            </svg>
+
+            <svg
+              className="cloud cloud-3"
+              viewBox="0 0 200 100"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <defs>
+                <linearGradient
+                  id="cloudGradient3"
+                  x1="0%"
+                  y1="0%"
+                  x2="0%"
+                  y2="100%"
+                >
+                  <stop
+                    offset="0%"
+                    style={{ stopColor: "#FFFFFF", stopOpacity: 1 }}
+                  />
+                  <stop
+                    offset="100%"
+                    style={{ stopColor: "#F0F5F3", stopOpacity: 0.95 }}
+                  />
+                </linearGradient>
+              </defs>
+              <ellipse
+                cx="60"
+                cy="55"
+                rx="35"
+                ry="25"
+                fill="url(#cloudGradient3)"
+                stroke="#8DA399"
+                strokeWidth="1.5"
+                strokeOpacity="0.35"
+              />
+              <ellipse
+                cx="85"
+                cy="50"
+                rx="40"
+                ry="30"
+                fill="url(#cloudGradient3)"
+                stroke="#8DA399"
+                strokeWidth="1.5"
+                strokeOpacity="0.35"
+              />
+              <ellipse
+                cx="110"
+                cy="55"
+                rx="35"
+                ry="25"
+                fill="url(#cloudGradient3)"
+                stroke="#8DA399"
+                strokeWidth="1.5"
+                strokeOpacity="0.35"
+              />
+              <ellipse
+                cx="75"
+                cy="65"
+                rx="50"
+                ry="25"
+                fill="url(#cloudGradient3)"
+                stroke="#8DA399"
+                strokeWidth="1.5"
+                strokeOpacity="0.35"
+              />
+            </svg>
+
+            <svg
+              className="cloud cloud-4"
+              viewBox="0 0 200 100"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <defs>
+                <linearGradient
+                  id="cloudGradient4"
+                  x1="0%"
+                  y1="0%"
+                  x2="0%"
+                  y2="100%"
+                >
+                  <stop
+                    offset="0%"
+                    style={{ stopColor: "#FFFFFF", stopOpacity: 1 }}
+                  />
+                  <stop
+                    offset="100%"
+                    style={{ stopColor: "#FFF5F0", stopOpacity: 0.95 }}
+                  />
+                </linearGradient>
+              </defs>
+              <ellipse
+                cx="60"
+                cy="55"
+                rx="35"
+                ry="25"
+                fill="url(#cloudGradient4)"
+                stroke="#D95D39"
+                strokeWidth="1.5"
+                strokeOpacity="0.35"
+              />
+              <ellipse
+                cx="85"
+                cy="50"
+                rx="40"
+                ry="30"
+                fill="url(#cloudGradient4)"
+                stroke="#D95D39"
+                strokeWidth="1.5"
+                strokeOpacity="0.35"
+              />
+              <ellipse
+                cx="110"
+                cy="55"
+                rx="35"
+                ry="25"
+                fill="url(#cloudGradient4)"
+                stroke="#D95D39"
+                strokeWidth="1.5"
+                strokeOpacity="0.35"
+              />
+              <ellipse
+                cx="75"
+                cy="65"
+                rx="50"
+                ry="25"
+                fill="url(#cloudGradient4)"
+                stroke="#D95D39"
+                strokeWidth="1.5"
+                strokeOpacity="0.35"
+              />
+            </svg>
+
+            <svg
+              className="cloud cloud-5"
+              viewBox="0 0 200 100"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <defs>
+                <linearGradient
+                  id="cloudGradient5"
+                  x1="0%"
+                  y1="0%"
+                  x2="0%"
+                  y2="100%"
+                >
+                  <stop
+                    offset="0%"
+                    style={{ stopColor: "#FFFFFF", stopOpacity: 1 }}
+                  />
+                  <stop
+                    offset="100%"
+                    style={{ stopColor: "#F0F5F3", stopOpacity: 0.95 }}
+                  />
+                </linearGradient>
+              </defs>
+              <ellipse
+                cx="60"
+                cy="55"
+                rx="35"
+                ry="25"
+                fill="url(#cloudGradient5)"
+                stroke="#8DA399"
+                strokeWidth="1.5"
+                strokeOpacity="0.35"
+              />
+              <ellipse
+                cx="85"
+                cy="50"
+                rx="40"
+                ry="30"
+                fill="url(#cloudGradient5)"
+                stroke="#8DA399"
+                strokeWidth="1.5"
+                strokeOpacity="0.35"
+              />
+              <ellipse
+                cx="110"
+                cy="55"
+                rx="35"
+                ry="25"
+                fill="url(#cloudGradient5)"
+                stroke="#8DA399"
+                strokeWidth="1.5"
+                strokeOpacity="0.35"
+              />
+              <ellipse
+                cx="75"
+                cy="65"
+                rx="50"
+                ry="25"
+                fill="url(#cloudGradient5)"
+                stroke="#8DA399"
+                strokeWidth="1.5"
+                strokeOpacity="0.35"
+              />
+            </svg>
+
+            <img src={AeroplanePng} alt="aeroplane" className="aeroplane-img" />
+            <div className="typing-text">
+              <span className="typing-content">
+                Loading something special for you
+              </span>
+            </div>
+          </div>
+        )}
+
+        {!showIntro && (
+          <>
+            {/* Unified Background */}
+            <div
+              className="fixed inset-0 bg-background-light"
+              style={{ zIndex: 0 }}
+            />
+
+            {/* Cherry Blossoms */}
+            <CherryBlossoms />
+
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={currentPage}
+                initial={{ opacity: 0, scale: 0.99 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.99 }}
+                transition={{
+                  duration: 0.4,
+                  ease: [0.4, 0.0, 0.2, 1],
+                }}
+                className="page-container text-gray-800 font-body overflow-hidden relative min-h-screen flex flex-col w-full"
+                style={{ maxWidth: "100vw" }}
+              >
+                {pages[currentPage]}
+              </motion.div>
+            </AnimatePresence>
+          </>
+        )}
+
+        <style>{`
         /* Aeroplane Intro Overlay */
         .aeroplane-intro-overlay {
           position: fixed;
@@ -626,7 +897,9 @@ function App() {
           }
         }
       `}</style>
-    </div>
+      </div>
+      <Analytics />
+    </>
   );
 }
 

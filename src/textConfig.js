@@ -22,7 +22,7 @@ You’re actual magic. A total rockstar. My panda 🐼.
 And I’m so, so lucky to have you ❤️
 
 Thank you for being you. I hope this made you smile, even if it was just a little (but hopefully a lot).
-Wish you are veryyyyy happpyyyy christmas baby!`,
+Wish you a veryyyyy happpyyyy christmas baby!`,
     letterSignature: "Always yours, Omie 💕",
     envelopeClickHint: "Click to open",
     specialDeliveryText: "Just For You 💌",
